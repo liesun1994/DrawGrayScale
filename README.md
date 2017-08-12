@@ -16,7 +16,7 @@
 <div align="center">
     <img alt="English" src="picture/en.jpg"><br><br>
 </div>
-3. Alignment
+3. Alignment (x for English, y for Chinese)
 <div align="center">
     <img alt="Alignment" src="picture/align.jpg"><br><br>
 </div>
