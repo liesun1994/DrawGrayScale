@@ -8,19 +8,19 @@
 
 ## Data format
 
-### 1. Chinese
+1. Chinese
 
 <div align="center">
     <img alt="Chinese" src="picture/ch.jpg"><br><br>
 </div>
 
-### 2. English 
+2. English 
 
 <div align="center">
     <img alt="English" src="picture/en.jpg"><br><br>
 </div>
 
-### 3. Alignment (x for English, y for Chinese)
+3. Alignment (x for English, y for Chinese)
 
 <div align="center">
     <img alt="Alignment" src="picture/align.jpg"><br><br>
