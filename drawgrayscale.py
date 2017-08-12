@@ -92,7 +92,8 @@ class DrawGrayScale(object):
         
         ax.grid(False)
         f.savefig(self.imgpath+'.pdf', bbox_inches='tight')
-        print('Successfully draw a picture.')
+        # print('Successfully draw a picture.') # python 3.* 
+        print 'Successfully draw a picture.'
         f.show()
 
 if __name__=='__main__':
