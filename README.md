@@ -20,7 +20,7 @@
     <img alt="English" src="picture/en.jpg"><br><br>
 </div>
 
-3. Alignment (x for English, y for Chinese)
+3. Alignment (x for English, y for Chinese)  or( x for Chinese, y for English: using drawgrayscle_rev.py)
 
 <div align="center">
     <img alt="Alignment" src="picture/align.jpg"><br><br>
@@ -29,7 +29,10 @@
 ## DrawGrayScale Usage 
 
 #### linux usage 
+###### x for English  y for Chinese
     python drawgrayscale_linux.py  ./data/file.ch  ./data/file.en  ./data/file.align  ./data/fileout 
+###### x for Chinese  y for English    
+    python drawgrayscale_reverse.py  ./data/file.en.rev  ./data/file.ch.rev  ./data/file.align.rev  ./data/fileout
 #### windows usage 
     python drawgrayscale.py  ./data/file.ch  ./data/file.en  ./data/file.align  ./data/fileout 
 
