@@ -49,5 +49,5 @@ or just move `font/simhei.ttf` to `$PYTHON_PATH\Lib\site-packages\matplotlib\mpl
 
 #### Linux_tips 
 if you wang to draw a picture with Chinese characters on top of linux, as in drawgrayscale_line.py(line 15), you may change the path with your own Chinese character path.
-links are listed as follows: [solution linux]http://blog.csdn.net/dgatiger/article/details/50414549
+links are listed as follows: [solution_linux](http://blog.csdn.net/dgatiger/article/details/50414549)
 
