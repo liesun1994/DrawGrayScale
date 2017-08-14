@@ -28,7 +28,7 @@
 
 ## DrawGrayScale Usage 
 
-    python drawgrayscale.py  file.ch  file.en  file.align  fileout 
+    python drawgrayscale.py  ./data/file.ch  ./data/file.en  ./data/file.align  ./data/fileout 
 
 ## Examples 
 
