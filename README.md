@@ -48,6 +48,6 @@ if you want to draw a picture with Chinese characters, as in drawgrayscale.py(li
 or just move `font/simhei.ttf` to `$PYTHON_PATH\Lib\site-packages\matplotlib\mpl-data\fonts\ttf` (windows only)
 
 #### Linux_tips 
-if you wang to draw a picture with Chinese characters on top of linux, as in drawgrayscale_line.py(line 15), you may change the path with your own Chinese character path.
+if you want to draw a picture with Chinese characters on top of linux, as in drawgrayscale_line.py(line 15), you may change the path to your own Chinese character path.
 links are listed as follows: [solution_linux](http://blog.csdn.net/dgatiger/article/details/50414549)
 
