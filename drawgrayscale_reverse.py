@@ -93,7 +93,7 @@ class DrawGrayScale(object):
         for en in en_parsed:
             en = unicode(en, "utf-8")
             en_parsed_new.append(en)
-        ax.set_xticklabels(en_parsed_new, fontsize=14, fontproperties=myfont)
+        ax.set_xticklabels(en_parsed_new, fontsize=14, rotation=90, fontproperties=myfont)
         # set x&y axis props
         for tick in ax.yaxis.get_major_ticks():
             tick.label1On = True
