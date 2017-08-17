@@ -17,9 +17,9 @@ myfont = FontProperties(fname='/usr/share/fonts/truetype/droid/DroidSansFallback
 logger = logging.getLogger(__name__)
 
 class DrawGrayScale(object):
-    def __init__(self, ch, en, align, imgpath):
-        self.ch=ch
-        self.en=en 
+    def __init__(self, x, y, align, imgpath):
+        self.x=x
+        self.y=y
         self.align=align
         self.imgpath=imgpath
 
@@ -40,40 +40,44 @@ class DrawGrayScale(object):
             splited_data.append(splited_now_data)
         return splited_data
 
+    def autofill_data(self, data, number):
+        for t in range(number):
+            data.append('<s>')
+        return data
+
     def parse_data(self):
-        ch_obj = open(self.ch)
-        en_obj = open(self.en)
+        x_obj = open(self.x)
+        y_obj = open(self.y)
         align_obj = open(self.align)
-        ch_txt = ch_obj.readlines()
-        en_txt = en_obj.readlines()
+        x_txt = x_obj.readlines()
+        y_txt = y_obj.readlines()
         align_txt = align_obj.readlines()
-        ch_splited = self.split_src_trg_data(ch_txt)
-        en_splited = self.split_src_trg_data(en_txt)
+        x_splited = self.split_src_trg_data(x_txt)
+        y_splited = self.split_src_trg_data(y_txt)
         align_splited = self.split_align_data(align_txt)
         align_obj.close()
-        en_obj.close()
-        ch_obj.close()
+        x_obj.close()
+        y_obj.close()
+        # judge data
+        if len(x_splited) > 1:
+            logger.error('x data multi_lines.')
+        elif len(y_splited) > 1:
+            logger.error('y data multi_lines.')
 
-        # judge data 
-        step = 0
-        for align_now in align_splited:
-            if len(en_splited[0]) != len(align_now):
-                logger.error('align line'+ step + ' wrong.')
+        x_size = len(x_splited[0])
+        y_size = len(y_splited[0])
+        align_x_size = len(align_splited[0])
+        align_y_size = len(align_splited)
+        minus_x = align_x_size - x_size
+        minus_y = align_y_size - y_size
+        auto_x = self.autofill_data(x_splited[0], minus_x)
+        auto_y = self.autofill_data(y_splited[0], minus_y)
 
-        if len(ch_splited[0]) != len(align_splited) :
-            logger.error('chinese data wrong.')
-        elif len(en_splited[0]) != len(align_splited[0]):
-            logger.error('english data wrong.')
-        if len(ch_splited) > 1: 
-            logger.error('chinese data multi_lines.')
-        elif len(en_splited) > 1:
-            logger.error('english data multi_lines.')
-        
-        return ch_splited[0], en_splited[0], align_splited
+        return auto_x, auto_y, align_splited
          
     def draw(self):
         # added for chinese symbols 
-        ch_parsed, en_parsed, align_parsed = self.parse_data()
+        x_parsed, y_parsed, align_parsed = self.parse_data()
         # plt.rcParams['font.sans-serif']=['simhei']
 		# clear figure 
         plt.clf()
@@ -81,15 +85,23 @@ class DrawGrayScale(object):
         ax = f.add_subplot(1, 1, 1)
         activation_map = np.asarray(align_parsed)
         # add image
-        i = ax.imshow(activation_map, interpolation='nearest', cmap='gray', aspect='equal')
-        ax.set_yticks(range(len(ch_parsed)))
-        ch_parsed_new =[]
-        for ch in ch_parsed:
-            ch = unicode(ch, "utf-8")
-            ch_parsed_new.append(ch)
-        ax.set_yticklabels(ch_parsed_new, fontsize=14, fontproperties=myfont)
-        ax.set_xticks(range(len(en_parsed)))
-        ax.set_xticklabels(en_parsed, rotation=90, fontsize=14, fontproperties=myfont)
+        ax.imshow(activation_map, interpolation='nearest', cmap='gray', aspect='equal')
+
+        ax.set_xticks(range(len(x_parsed)))
+        x_parsed_new = []
+        for x in x_parsed:
+            x = unicode(x, "utf-8")
+            x_parsed_new.append(x)
+        ax.set_xticklabels(x_parsed_new, rotation=90, fontproperties=myfont)
+        ax.set_xlabel("input sequence")
+
+        ax.set_yticks(range(len(y_parsed)))
+        y_parsed_new = []
+        for y in y_parsed:
+            y = unicode(y, "utf-8")
+            y_parsed_new.append(y)
+        ax.set_yticklabels(y_parsed_new, fontproperties=myfont)
+        ax.set_ylabel("output sequence")
         # set x&y axis props
         for tick in ax.yaxis.get_major_ticks():
             tick.label1On = True
@@ -98,10 +110,11 @@ class DrawGrayScale(object):
         for tick in ax.xaxis.get_major_ticks():
             tick.tick2On = False 
             tick.tick1On = False
-            tick.label1On = False 
-            tick.label2On = True
-        
+            tick.label1On = True
+            tick.label2On = False
+
         ax.grid(False)
+        f.tight_layout()
         f.savefig(self.imgpath+'.pdf', bbox_inches='tight')
         # print('Successfully draw a picture.') # python 3.* 
         print 'Successfully draw a picture.'
@@ -114,5 +127,5 @@ if __name__=='__main__':
     parser.add_argument('align', type=str)
     parser.add_argument('imgpath', type=str)
     args = parser.parse_args()
-    draw_obj = DrawGrayScale(ch=args.ch, en=args.en, align=args.align, imgpath=args.imgpath)
+    draw_obj = DrawGrayScale(x=args.ch, y=args.en, align=args.align, imgpath=args.imgpath)
     draw_obj.draw()
