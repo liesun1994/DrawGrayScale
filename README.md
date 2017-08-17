@@ -28,8 +28,8 @@
 
 ## DrawGrayScale Usage 
 
-#### linux usage 
-###### x for input  y for output
+#### linux usage (x for input  y for output   utf-8 file)
+##### add auto-fill owing to alignment (add eos symbol)
     python drawgrayscale_linux.py  ./data/x.file  ./data/y.file  ./data/ailgn.file  ./data/fileout 
 #### windows usage 
     python drawgrayscale.py  ./data/file.ch  ./data/file.en  ./data/file.align  ./data/fileout 
